@@ -1,0 +1,153 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependency directories
+node_modules/
+jspm_packages/
+.pnp/
+.pnp.js
+
+# Testing files
+coverage/
+.nyc_output/
+*.lcov
+
+# Production build output
+dist/
+build/
+.tmp/
+.temp/
+
+# TypeScript
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# IDE and Editor files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# dotenv environment files
+.env
+.env.test
+.env.production
+.env.local
+
+# NPM and Yarn files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Linting files
+.eslintcache
+.stylelintcache
+
+# Optional npm cache directory
+.npm/
+
+# Parcel-bundler cache
+.cache/
+
+# Next.js build and cache
+.next/
+out/
+
+# SvelteKit build
+.svelte-kit/
+
+# Nuxt build and generated files
+.nuxt/
+.nuxt-dist/
+
+# Gatsby files
+.cache/
+public/
+
+# React Native
+.expo/
+.expo-shared/
+android/
+ios/
+
+# Firebase files
+.firebaserc
+.firebase/
+firebase-debug.log
+
+# Serverless Framework files
+.serverless/
+
+# Storybook files
+out/
+storybook-static/
+
+# Sapper build
+__sapper__/
+
+# Vue.js build
+.vuepress/dist/
+.vuepress/.temp/
+
+# Rollup cache
+.rpt2_cache/
+
+# Jest
+jest.config.js
+jest/
+
+# Cloud Provider Configurations
+*.aws/
+*.azure/
+*.gcloud/
+*.terraform/
+*.docker/
+*.ebextensions/
+*.elasticbeanstalk/
+*.serverless/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+*.project
+.settings/
+*.classpath
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Gradle
+.gradle/
+build/
+
+# Eclipse
+.settings/
+.metadata/
+.recommenders/
+bin/
+
+# MISC
+vite.config.ts
+tailwind.config.js
+vite-env.d.ts
+
