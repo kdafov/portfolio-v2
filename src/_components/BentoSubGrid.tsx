@@ -26,16 +26,13 @@ export const BentoSubGrid = ({
     last,
 }: BentoSubGridProps): ReactElement => {
     return (
-        <div className={`flex p-px lg:col-span-${colSpan}`}>
+        <div className={`flex p-px lg:col-span-${colSpan} sm:block lg:flex`}>
             <div
-                className={`overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 ${
-                    first || last
-                        ? `
-                            ${first ? 'max-lg:rounded-t-[2rem]' : ''} 
-                            ${last ? 'max-lg:rounded-b-[2rem]' : ''}
-                        `
-                        : ''
-                } lg:rounded-${position}-[2rem] w-full`}
+                className={`overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-${position}-[2rem] 
+                    ${first ? 'max-lg:rounded-t-[2rem]' : ''} 
+                    ${last ? 'max-lg:rounded-b-[2rem]' : ''} 
+                    ${children ? 'w-full flex items-center p-8' : ''}
+                `}
             >
                 {children ?? (
                     <>
