@@ -12,8 +12,6 @@ type BentoSubGridProps = {
     colSpan: number;
     highlight?: Highlight;
     position: 'tl' | 'tr' | 'bl' | 'br';
-    first?: boolean;
-    last?: boolean;
 };
 
 export const BentoSubGrid = ({
@@ -22,8 +20,6 @@ export const BentoSubGrid = ({
     colSpan,
     highlight,
     position,
-    first,
-    last,
 }: BentoSubGridProps): ReactElement => {
     const colSpanClassMap: { [key: number]: string } = {
         1: 'lg:col-span-1',
@@ -35,20 +31,18 @@ export const BentoSubGrid = ({
     };
 
     const positionClassMap: { [key: string]: string } = {
-        tl: 'rounded-tl-2xl',
-        tr: 'rounded-tr-2xl',
-        bl: 'rounded-bl-2xl',
-        br: 'rounded-br-2xl',
+        tl: 'rounded-tl-[2rem] max-lg:rounded-t-[2rem]',
+        tr: 'lg:rounded-tr-[2rem]',
+        bl: 'lg:rounded-bl-[2rem]',
+        br: 'rounded-br-[2rem] max-lg:rounded-b-[2rem]',
     };
 
     return (
         <div className={`flex p-px sm:block lg:flex ${colSpanClassMap[colSpan]}`}>
             <div
-                className={`overflow-hidden bg-gray-800 ring-1 ring-white/15 ${
-                    positionClassMap[position]
-                } 
-                    ${first ? 'max-lg:rounded-t-[2rem]' : ''} 
-                    ${last ? 'max-lg:rounded-b-[2rem]' : ''} 
+                className={`
+                    overflow-hidden bg-gray-800 ring-1 ring-white/15 
+                    ${positionClassMap[position]} 
                     ${children ? 'w-full flex items-center p-8' : ''}
                 `}
             >

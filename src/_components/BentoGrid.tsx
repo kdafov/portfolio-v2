@@ -31,7 +31,7 @@ export default function BentoGrid(): ReactElement {
                     {sectionLabels[1]}
                 </p>
                 <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
-                    <BentoSubGrid colSpan={4} position="tl" first>
+                    <BentoSubGrid colSpan={4} position="tl">
                         <Solutions />
                     </BentoSubGrid>
 
@@ -52,7 +52,7 @@ export default function BentoGrid(): ReactElement {
                         <Feed />
                     </BentoSubGrid>
 
-                    <BentoSubGrid colSpan={4} position="br" last>
+                    <BentoSubGrid colSpan={4} position="br">
                         <Credentials />
                     </BentoSubGrid>
                 </div>
