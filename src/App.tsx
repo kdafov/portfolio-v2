@@ -1,4 +1,5 @@
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BentoGrid from './_components/BentoGrid';
 import ContactForm from './_components/ContactForm';
 import Footer from './_components/Footer';
@@ -7,13 +8,23 @@ import Testimonials from './_components/Testimonials';
 
 function App() {
     return (
-        <>
-            <Hero />
-            <BentoGrid />
-            <Testimonials />
-            <ContactForm />
-            <Footer />
-        </>
+        <Router>
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <>
+                            <Hero />
+                            <BentoGrid />
+                            <Testimonials />
+                            <ContactForm />
+                            <Footer />
+                        </>
+                    }
+                />
+                <Route path="/projects" element={<p>project page</p>} />
+            </Routes>
+        </Router>
     );
 }
 
