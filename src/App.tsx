@@ -5,6 +5,7 @@ import ContactForm from './_components/ContactForm';
 import Footer from './_components/Footer';
 import Hero from './_components/Hero';
 import Testimonials from './_components/Testimonials';
+import Projects from './_components/Projects';
 
 function App() {
     return (
@@ -22,7 +23,7 @@ function App() {
                         </>
                     }
                 />
-                <Route path="/projects" element={<p>project page</p>} />
+                <Route path="/projects" element={<Projects />} />
             </Routes>
         </Router>
     );
