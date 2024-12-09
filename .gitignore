@@ -146,8 +146,4 @@ build/
 .recommenders/
 bin/
 
-# MISC
-vite.config.ts
-tailwind.config.js
-vite-env.d.ts
 
