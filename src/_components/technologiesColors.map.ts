@@ -26,6 +26,7 @@ export const technologiesColors = {
     Django: 'bg-yellow-50 text-yellow-800 ring-yellow-600/20',
     Flask: 'bg-yellow-50 text-yellow-800 ring-yellow-600/20',
     FastAPI: 'bg-yellow-50 text-yellow-800 ring-yellow-600/20',
+    JupyterNotebook: 'bg-yellow-50 text-yellow-800 ring-yellow-600/20',
   
     // Java and JVM Ecosystem
     Java: 'bg-red-50 text-red-700 ring-red-700/10',
@@ -78,5 +79,9 @@ export const technologiesColors = {
     // Business tools
     FBPixel: 'bg-black text-white ring-white-700/10',
     GoogleAds: 'bg-black text-white ring-white-700/10',
+
+    // IoT
+    Arduino: 'bg-lime-50 text-lime-700 ring-lime-700/10',
+    MQTT: 'bg-lime-50 text-lime-700 ring-lime-700/10',
   } as const;
   

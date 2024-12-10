@@ -114,5 +114,82 @@ export const projects: ProjectType[] = [
         technologies: ['Python'],
         viewLink: 'https://github.com/kdafov/python-table-component',
         buttonText: 'View on GitHub'
+    },
+    {
+        title: 'Grid Craft',
+        description: 'This program is an interactive tool that lets users create and connect points on a grid. In Point Mode, users can add or remove points, and in Line Mode, they can connect points with lines. The grid updates visually to show changes, making it easy to build and manage point-and-line relationships.',
+        version: 'v1 [deprecated]',
+        imageSrc: 'grid-craft.png',
+        imageAlt: 'Grid Craft',
+        rating: 2,
+        technologies: ['Python'],
+        viewLink: 'https://github.com/kdafov/grid-craft',
+        buttonText: 'View on GitHub'
+    },
+    {
+        title: 'Homesys',
+        description: 'This app is a recipe browser built with Next.js, enabling users to explore recipes by category and view detailed information, including ingredients, preparation steps, and pairing suggestions, with an intuitive and image-rich interface.',
+        version: 'v1 [deprecated]',
+        imageSrc: 'homesys.png',
+        imageAlt: 'Homesys',
+        rating: 1,
+        technologies: ['NextJs', 'TailwindCSS'],
+        viewLink: 'https://homesys.vercel.app/',
+        buttonText: 'View live'
+    },
+    {
+        title: 'KKSYS',
+        description: 'This project is a real-time monitoring and control system for IoT-enabled devices, utilizing Socket.IO for live data updates and MQTT for device communication. It features a web interface built with React and Material-UI that displays sensor data (e.g., temperature, humidity, motion, rain) from two MCU devices, "Vhod" and "Naves," with functionality to view historical data, system status, and weather forecasts.',
+        version: 'v2.2 [deprecated]',
+        imageSrc: 'kksys.png',
+        imageAlt: 'KKSYS',
+        rating: 4,
+        technologies: ['Python', 'Arduino', 'WebSockets', 'MQTT', 'MUI', 'NextJs'],
+        viewLink: 'https://github.com/kdafov/kksys',
+        buttonText: 'View on GitHub'
+    },
+    {
+        title: 'Sense Box',
+        description: 'SenseBox, is a portable environmental monitoring system designed to measure temperature, humidity, and gas levels using a DHT11 sensor and an MQ gas sensor. The data is displayed in real-time on an LCD screen, with built-in alerts for gas hazards based on predefined thresholds. Compact and versatile, SenseBox is ideal for on-the-go environmental monitoring and safety applications.',
+        version: 'v1 [on hold]',
+        imageSrc: 'sense-box.png',
+        imageAlt: 'Sense Box',
+        rating: 3,
+        technologies: ['Arduino'],
+        viewLink: 'https://github.com/kdafov/sense-box',
+        buttonText: 'View on GitHub'
+    },
+    {
+        title: 'Data Modeling',
+        description: 'This project aims to analyze and model datasets using advanced machine learning techniques, focusing on feature selection, classification, regression, hypothesis testing, and clustering. By preprocessing and transforming the data, the project identifies key features and evaluates the performance of various models, including SVR, Gradient Boosting, and clustering algorithms like KMeans and Agglomerative Clustering. It also conducts hypothesis testing to compare model performances and determine their statistical significance, ultimately striving for accurate predictions and efficient classification across both datasets.',
+        version: 'v1 [deprecated]',
+        imageSrc: 'data-modeling.png',
+        imageAlt: 'Data Modeling',
+        rating: 4,
+        technologies: ['JupyterNotebook', 'Python'],
+        viewLink: 'https://github.com/kdafov/data-modeling',
+        buttonText: 'View on GitHub'
+    },
+    {
+        title: 'Amazon Chatbot',
+        description: 'This project implements a chatbot designed to assist users with common issues related to Amazon products, such as returns, delivery updates, warranties, and manuals. The chatbot is built with a React frontend and a Python Flask backend to ensure a seamless user experience.',
+        version: 'v1 [early stage]',
+        imageSrc: 'aws-chatbot.png',
+        imageAlt: 'AWS Chatbot',
+        rating: 4,
+        technologies: ['GCP', 'Docker', 'Flask', 'React'],
+        viewLink: 'https://github.com/kdafov/amazon-chatbot',
+        buttonText: 'View on GitHub'
+    },
+    {
+        title: 'Pub Quiz',
+        description: 'This project is a fast-paced Pub Quiz game built in React, where users answer a series of 10 shuffled questions within a 15-second timer for each question. It tracks user answers, scores dynamically, and provides a detailed summary of correct and incorrect answers at the end, allowing users to replay for a better score.',
+        version: 'v1 [deprecated]',
+        imageSrc: 'pub-quiz.png',
+        imageAlt: 'Pub Quiz',
+        rating: 2,
+        technologies: ['React', 'Docker'],
+        viewLink: 'https://github.com/kdafov/pub-quiz',
+        buttonText: 'View on GitHub'
     }
 ]
