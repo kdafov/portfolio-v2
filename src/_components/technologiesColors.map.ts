@@ -83,5 +83,9 @@ export const technologiesColors = {
     // IoT
     Arduino: 'bg-lime-50 text-lime-700 ring-lime-700/10',
     MQTT: 'bg-lime-50 text-lime-700 ring-lime-700/10',
+
+    // Terminal
+    BatchScript: 'bg-black text-white ring-black',
+    BashScript: 'bg-black text-white ring-black',
   } as const;
   

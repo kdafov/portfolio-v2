@@ -191,5 +191,16 @@ export const projects: ProjectType[] = [
         technologies: ['React', 'Docker'],
         viewLink: 'https://github.com/kdafov/pub-quiz',
         buttonText: 'View on GitHub'
+    },
+    {
+        title: 'WebX Builder',
+        description: 'WebX Builder is a powerful and customizable command-line tool designed to simplify the process of setting up modern React-based web development projects. With WebX Builder, developers can create project environments, integrate essential configurations, and automate repetitive tasks, allowing them to focus on building their applications.',
+        version: 'v1 [in production]',
+        imageSrc: 'webx.png',
+        imageAlt: 'WebX',
+        rating: 3,
+        technologies: ['BatchScript'],
+        viewLink: 'https://github.com/kdafov/webx-builder',
+        buttonText: 'View on GitHub'
     }
 ]
