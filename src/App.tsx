@@ -6,6 +6,7 @@ import Footer from './_components/Footer';
 import Hero from './_components/Hero';
 import Testimonials from './_components/Testimonials';
 import Projects from './_components/Projects';
+import GamesHub from './_components/GamesHub';
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                     }
                 />
                 <Route path="/projects" element={<Projects />} />
+                <Route path="/games" element={<GamesHub />} />
             </Routes>
         </Router>
     );

@@ -1,11 +1,27 @@
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import CodeBlock from './CodeBlock';
 import { HeroSubText } from './HeroSubText';
+import { useState } from 'react';
 
 export default function Hero() {
     const subLinks: Array<string> = ['Projects list', 'Check all projects'];
     const title: string = 'Full-stack software engineer';
     const mainLinks: Array<string> = ['Contact me', 'View my GitHub'];
+
+    const [clickTimeout, setClickTimeout] = useState<number | null>(null);
+    const handleLogoClick = () => {
+        if (clickTimeout) {
+            clearTimeout(clickTimeout);
+            setClickTimeout(null);
+            window.location.href = '/games';
+        } else {
+            const timeout = setTimeout(() => {
+                window.location.href = '/';
+                setClickTimeout(null);
+            }, 500);
+            setClickTimeout(timeout);
+        }
+    };
 
     return (
         <div className="bg-white">
@@ -14,7 +30,12 @@ export default function Hero() {
                     <div className="px-6 lg:px-0 lg:pt-4">
                         <div className="mx-auto max-w-2xl">
                             <div className="max-w-lg">
-                                <img className="h-16" src="logo.png" alt="KD" />
+                                <img
+                                    className="h-16"
+                                    src="logo.png"
+                                    alt="KD"
+                                    onClick={handleLogoClick}
+                                />
                                 <div className="mt-24 sm:mt-32 lg:mt-16">
                                     <a href="/projects" className="inline-flex space-x-6">
                                         <span className="rounded-full bg-indigo-600/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-600/10">
