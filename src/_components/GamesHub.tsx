@@ -16,7 +16,7 @@ export default function GamesHub() {
                     <ArrowLeftIcon className="h-5 w-5 mr-2" />
                     Back to Games Hub
                 </button>
-                <div className="bg-white shadow-md rounded-lg p-6">{selectedGame.component}</div>
+                {selectedGame.component}
             </div>
         );
     }
