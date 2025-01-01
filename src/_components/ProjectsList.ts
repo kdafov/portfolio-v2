@@ -129,7 +129,7 @@ export const projects: ProjectType[] = [
     {
         title: 'Homesys',
         description: 'This app is a recipe browser built with Next.js, enabling users to explore recipes by category and view detailed information, including ingredients, preparation steps, and pairing suggestions, with an intuitive and image-rich interface.',
-        version: 'v1 [deprecated]',
+        version: 'v2 [in production]',
         imageSrc: 'homesys.png',
         imageAlt: 'Homesys',
         rating: 1,
@@ -201,6 +201,17 @@ export const projects: ProjectType[] = [
         rating: 3,
         technologies: ['BatchScript'],
         viewLink: 'https://github.com/kdafov/webx-builder',
+        buttonText: 'View on GitHub'
+    },
+    {
+        title: 'Kdafov Worker',
+        description: 'This project is a Cloudflare Worker API built with OpenAPI 3.1, Chanfana, and Hono, serving features for my portfolio, such as daily random words and cocktails. It includes database setup, validation, and local/remote population scripts, with Swagger endpoints available locally.',
+        version: 'v1.2 [in production]',
+        imageSrc: 'kdafov-worker.png',
+        imageAlt: 'OpenAPI Swagger',
+        rating: 3,
+        technologies: ['TypeScript', 'Cloudflare'],
+        viewLink: 'https://github.com/kdafov/portfolio-worker',
         buttonText: 'View on GitHub'
     }
 ]

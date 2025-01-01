@@ -64,6 +64,7 @@ export const technologiesColors = {
     Azure: 'bg-orange-50 text-orange-700 ring-orange-700/10',
     Terraform: 'bg-orange-50 text-orange-700 ring-orange-700/10',
     Ansible: 'bg-orange-50 text-orange-700 ring-orange-700/10',
+    Cloudflare: 'bg-orange-50 text-orange-700 ring-orange-700/10',
   
     // Testing Tools
     Jest: 'bg-teal-50 text-teal-700 ring-teal-700/10',
