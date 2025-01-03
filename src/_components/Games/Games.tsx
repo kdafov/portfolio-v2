@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import DWord from './DWord';
+import DWord from './DWord/DWord';
 
 export type GameType = {
     title: string;
@@ -11,7 +11,7 @@ export type GameType = {
 
 export const games: GameType[] = [
     {
-        title: 'DWord',
+        title: 'TheWord',
         description:
             'Word-guessing game where the player attempt to deduce a hidden word, with feedback provided on each guess.',
         imageSrc: 'dword.png',

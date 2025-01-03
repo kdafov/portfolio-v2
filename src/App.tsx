@@ -6,7 +6,7 @@ import Footer from './_components/Footer';
 import Hero from './_components/Hero';
 import Testimonials from './_components/Testimonials';
 import Projects from './_components/Projects';
-import GamesHub from './_components/GamesHub';
+import GamesHub from './_components/Games/GamesHub';
 
 function App() {
     return (
