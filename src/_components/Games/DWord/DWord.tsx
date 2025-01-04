@@ -103,37 +103,55 @@ export default function DWord() {
         if (!gameState.wordData) return;
 
         const { word } = gameState.wordData;
+        const wordArray = word.split('');
+        const guessArray = gameState.currentGuess.split('');
 
         if (gameState.currentGuess.length !== word.length) {
             showAlert(`Guess must be ${word.length} letters.`, 'error');
             return;
         }
 
-        const newTracker = { ...gameState.letterTracker };
-        gameState.currentGuess.split('').forEach((letter, index) => {
-            const lowerLetter = letter.toLowerCase();
-            if (word[index] === lowerLetter) {
-                newTracker[lowerLetter] = 'correct';
-            } else if (word.includes(lowerLetter)) {
-                newTracker[lowerLetter] = 'present';
-            } else {
-                newTracker[lowerLetter] = 'absent';
+        const tempTracker: Record<string, string> = { ...gameState.letterTracker };
+        const matchedIndices: Set<number> = new Set();
+
+        // First pass: Mark exact matches (green)
+        guessArray.forEach((letter, index) => {
+            if (wordArray[index] === letter.toLowerCase()) {
+                tempTracker[letter.toLowerCase()] = 'correct';
+                matchedIndices.add(index);
             }
         });
 
-        const gameWon = gameState.currentGuess.toLowerCase() === word;
+        // Second pass: Mark present (yellow) and absent (gray)
+        guessArray.forEach((letter, index) => {
+            if (!matchedIndices.has(index)) {
+                const lowerLetter = letter.toLowerCase();
+                const remainingIndices = wordArray
+                    .map((w, i) => (w === lowerLetter && !matchedIndices.has(i) ? i : -1))
+                    .filter((i) => i !== -1);
+
+                if (remainingIndices.length > 0) {
+                    tempTracker[lowerLetter] = 'present';
+                    matchedIndices.add(remainingIndices[0]);
+                } else {
+                    tempTracker[lowerLetter] = 'absent';
+                }
+            }
+        });
+
+        const gameWon = guessArray.join('').toLowerCase() === word;
         const gameLost = !gameWon && gameState.attempts.length + 1 >= maxAttempts(word.length);
 
         updateGameCookie({
             status: gameWon ? 'won' : gameLost ? 'failed' : 'in_progress',
             attempts: [...gameState.attempts, gameState.currentGuess],
-            letterTracker: newTracker,
+            letterTracker: tempTracker,
         });
 
         setGameState((prev) => ({
             ...prev,
             attempts: [...prev.attempts, prev.currentGuess],
-            letterTracker: newTracker,
+            letterTracker: tempTracker,
             currentGuess: '',
             gameWon,
             gameLost,
