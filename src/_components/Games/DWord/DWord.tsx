@@ -40,6 +40,15 @@ export default function DWord() {
         gameLost: false,
     });
 
+    const [showLastHint, setShowLastHint] = useState(false);
+    const [revealedHint, setRevealedHint] = useState<{ letter: string; index: number } | null>(
+        null,
+    );
+
+    const attemptsLeft = gameState.wordData?.word
+        ? maxAttempts(gameState.wordData?.word.length) - gameState.attempts.length
+        : 0;
+
     useEffect(() => {
         const loadGame = async () => {
             try {
@@ -69,7 +78,31 @@ export default function DWord() {
         };
 
         loadGame();
-    }, [showAlert]);
+    }, []);
+
+    useEffect(() => {
+        const wordLength = gameState.wordData?.word.length || 0;
+        const attemptsThreshold = Math.floor(maxAttempts(wordLength) / 2);
+
+        if (!gameState.gameWon && !gameState.gameLost && attemptsLeft === attemptsThreshold) {
+            const messages = [
+                'Hints are now available! Check the boxes below to reveal helpful details.',
+                'Feeling stuck? You can now get a hint! Click the boxes below for more help.',
+                'Need a boost? Check out the hint section below to reveal some useful clues.',
+                "Don't give up! A hint might be all you need. Check the boxes below to uncover clues.",
+            ];
+
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            showAlert(randomMessage, 'info');
+        }
+
+        if (!gameState.gameWon && !gameState.gameLost && attemptsLeft === 1) {
+            showAlert(
+                'This is your last attempt! Consider using the hint below to reveal a letter!',
+                'warning',
+            );
+        }
+    }, [attemptsLeft]);
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
         if (!gameState.wordData) return;
@@ -181,13 +214,48 @@ export default function DWord() {
         );
     }
 
-    const attemptsLeft = gameState.wordData?.word
-        ? maxAttempts(gameState.wordData?.word.length) - gameState.attempts.length
-        : 0;
+    const revealHint = () => {
+        if (!gameState.wordData) return;
+
+        const wordArray = gameState.wordData.word.split('');
+        const allGuessedLetters = gameState.attempts.join('').split('');
+
+        // Find indices of letters that are neither guessed correctly nor guessed at all
+        const greyIndices = wordArray
+            .map((letter, index) => ({ letter, index }))
+            .filter(
+                ({ letter }) =>
+                    !allGuessedLetters.includes(letter) &&
+                    !gameState.letterTracker[letter]?.includes('correct'),
+            )
+            .map(({ index }) => index);
+
+        let revealIndex;
+
+        if (greyIndices.length > 0) {
+            // Prioritize revealing a "grey" letter
+            revealIndex = greyIndices[Math.floor(Math.random() * greyIndices.length)];
+        } else {
+            // If no grey letters, reveal a random unrevealed letter
+            const unrevealedIndices = wordArray
+                .map((_, index) => index)
+                .filter((index) => !gameState.attempts.join('').includes(wordArray[index]));
+
+            if (unrevealedIndices.length > 0) {
+                revealIndex =
+                    unrevealedIndices[Math.floor(Math.random() * unrevealedIndices.length)];
+            } else {
+                return;
+            }
+        }
+
+        setRevealedHint({ letter: wordArray[revealIndex], index: revealIndex });
+        setShowLastHint(true);
+    };
 
     return (
         <div
-            className="bg-gray-100 flex flex-col items-center p-4 rounded-lg relative"
+            className="bg-gray-100 flex flex-col items-center p-4 rounded-lg relative overflow-x-auto scrollbar-hide"
             style={{ height: 'calc(100vh - 150px)' }}
         >
             <h1 className="text-3xl font-bold text-gray-900 mb-2">DWord</h1>
@@ -215,6 +283,16 @@ export default function DWord() {
                 setShowDefinition={(value) =>
                     setGameState((prev) => ({ ...prev, showDefinition: value }))
                 }
+                revealHint={revealHint}
+                showHintBox={!gameState.gameWon && !gameState.gameLost && attemptsLeft === 1}
+                showHints={
+                    !gameState.gameWon &&
+                    !gameState.gameLost &&
+                    attemptsLeft <=
+                        Math.floor(maxAttempts(gameState.wordData?.word.length || 0) / 2)
+                }
+                showLastHint={showLastHint}
+                revealedHint={revealedHint}
             />
 
             {(gameState.gameWon || gameState.gameLost) && (
