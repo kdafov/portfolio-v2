@@ -1,7 +1,7 @@
 export interface WordData {
     word: string;
-    definition: string | null;
-    type: string | null;
+    definition: string[]; 
+    type: string[]; 
 }
 
 export const fetchWord = async (): Promise<WordData> => {
@@ -12,8 +12,8 @@ export const fetchWord = async (): Promise<WordData> => {
         if (response.ok) {
             return {
                 word: data.word.toLowerCase(),
-                definition: data.definition,
-                type: data.type,
+                definition: data.definition ? JSON.parse(data.definition) : [],
+                type: data.type ? JSON.parse(data.type) : [],
             };
         } else {
             throw new Error('Failed to fetch word data');

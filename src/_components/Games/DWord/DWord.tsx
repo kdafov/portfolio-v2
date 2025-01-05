@@ -8,12 +8,7 @@ import HintBox from './HintBox';
 import LetterTracker from './LetterTracker';
 import GameResultOverlay from './GameResultOverlay';
 import { checkOrCreateGameCookie, updateGameCookie } from './gameCookieHandler';
-
-export interface WordData {
-    word: string;
-    definition: string | null;
-    type: string | null;
-}
+import { WordData } from './fetchWord';
 
 export interface GameState {
     wordData: WordData | null;
@@ -145,28 +140,36 @@ export default function DWord() {
         }
 
         const tempTracker: Record<string, string> = { ...gameState.letterTracker };
-        const matchedIndices: Set<number> = new Set();
+        const letterCounts: Record<string, number> = {};
+        const markedIndices: Set<number> = new Set();
 
-        // First pass: Mark exact matches (green)
+        wordArray.forEach((letter) => {
+            letterCounts[letter] = (letterCounts[letter] || 0) + 1;
+        });
+
+        // First pass: Mark greens and decrement counts
         guessArray.forEach((letter, index) => {
-            if (wordArray[index] === letter.toLowerCase()) {
-                tempTracker[letter.toLowerCase()] = 'correct';
-                matchedIndices.add(index);
+            const lowerLetter = letter.toLowerCase();
+            if (wordArray[index] === lowerLetter) {
+                tempTracker[lowerLetter] = 'correct';
+                markedIndices.add(index);
+                letterCounts[lowerLetter] -= 1;
             }
         });
 
-        // Second pass: Mark present (yellow) and absent (gray)
+        // Second pass: Process remaining letters for yellows and final grays
         guessArray.forEach((letter, index) => {
-            if (!matchedIndices.has(index)) {
-                const lowerLetter = letter.toLowerCase();
-                const remainingIndices = wordArray
-                    .map((w, i) => (w === lowerLetter && !matchedIndices.has(i) ? i : -1))
-                    .filter((i) => i !== -1);
+            if (markedIndices.has(index)) {
+                return; // Skip already marked greens
+            }
 
-                if (remainingIndices.length > 0) {
-                    tempTracker[lowerLetter] = 'present';
-                    matchedIndices.add(remainingIndices[0]);
-                } else {
+            const lowerLetter = letter.toLowerCase();
+            if (letterCounts[lowerLetter] > 0) {
+                tempTracker[lowerLetter] = 'present';
+                letterCounts[lowerLetter] -= 1;
+            } else {
+                // Mark as gray (not present)
+                if (!tempTracker[lowerLetter]) {
                     tempTracker[lowerLetter] = 'absent';
                 }
             }
@@ -180,7 +183,6 @@ export default function DWord() {
             attempts: [...gameState.attempts, gameState.currentGuess],
             letterTracker: tempTracker,
         });
-
         setGameState((prev) => ({
             ...prev,
             attempts: [...prev.attempts, prev.currentGuess],
