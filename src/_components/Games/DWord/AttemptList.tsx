@@ -14,20 +14,36 @@ export default function AttemptList({ attempts, wordData }: AttemptListProps) {
                 const guessArray = attempt.split('');
                 const tempMatch = new Array(wordArray.length).fill(false);
 
+                // First pass: Mark greens
+                guessArray.forEach((letter, i) => {
+                    if (wordArray[i] === letter.toLowerCase()) {
+                        tempMatch[i] = true; // Mark as matched for green
+                    }
+                });
+
+                // Render the guess
                 return (
                     <div key={index} className="flex gap-1">
                         {guessArray.map((letter, i) => {
-                            let colorClass = 'bg-gray-200 text-black';
+                            const lowerLetter = letter.toLowerCase();
+                            let colorClass = 'bg-gray-200 text-black'; // Default to gray
 
-                            if (wordArray[i] === letter.toLowerCase()) {
+                            // Green: Correct letter and correct position
+                            if (wordArray[i] === lowerLetter) {
                                 colorClass = 'bg-green-500 text-white';
-                                tempMatch[i] = true;
-                            } else if (
-                                wordArray.includes(letter.toLowerCase()) &&
-                                !tempMatch[wordArray.indexOf(letter.toLowerCase())]
+                            }
+                            // Yellow: Correct letter but wrong position
+                            else if (
+                                wordArray.includes(lowerLetter) &&
+                                tempMatch.findIndex(
+                                    (matched, idx) => !matched && wordArray[idx] === lowerLetter,
+                                ) !== -1
                             ) {
                                 colorClass = 'bg-yellow-500 text-white';
-                                tempMatch[wordArray.indexOf(letter.toLowerCase())] = true;
+                                const matchIndex = tempMatch.findIndex(
+                                    (matched, idx) => !matched && wordArray[idx] === lowerLetter,
+                                );
+                                tempMatch[matchIndex] = true; // Mark as matched for yellow
                             }
 
                             return (
