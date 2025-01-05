@@ -8,12 +8,7 @@ import HintBox from './HintBox';
 import LetterTracker from './LetterTracker';
 import GameResultOverlay from './GameResultOverlay';
 import { checkOrCreateGameCookie, updateGameCookie } from './gameCookieHandler';
-
-export interface WordData {
-    word: string;
-    definition: string | null;
-    type: string | null;
-}
+import { WordData } from './fetchWord';
 
 export interface GameState {
     wordData: WordData | null;
