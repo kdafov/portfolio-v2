@@ -9,6 +9,7 @@ import LetterTracker from './LetterTracker';
 import GameResultOverlay from './GameResultOverlay';
 import { checkOrCreateGameCookie, updateGameCookie } from './gameCookieHandler';
 import { WordData } from './fetchWord';
+import { isValidWord } from './checkWord';
 
 export interface GameState {
     wordData: WordData | null;
@@ -127,7 +128,7 @@ export default function DWord() {
         }
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!gameState.wordData) return;
 
         const { word } = gameState.wordData;
@@ -136,6 +137,11 @@ export default function DWord() {
 
         if (gameState.currentGuess.length !== word.length) {
             showAlert(`Guess must be ${word.length} letters.`, 'error');
+            return;
+        }
+
+        if (!(await isValidWord(gameState.currentGuess))) {
+            showAlert('Enter a valid word.', 'error');
             return;
         }
 
