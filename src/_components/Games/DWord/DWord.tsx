@@ -264,7 +264,7 @@ export default function DWord() {
             <p className="text-gray-700 mb-4">Attempts left: {attemptsLeft}</p>
 
             <AttemptList attempts={gameState.attempts} wordData={gameState.wordData} />
-            {!gameState.gameWon && !gameState.gameLost && attemptsLeft > 0 && (
+            {attemptsLeft > 0 && (
                 <div className="mt-4">
                     <WordInput
                         wordLength={gameState.wordData.word.length}
@@ -276,26 +276,34 @@ export default function DWord() {
                     />
                 </div>
             )}
-            <LetterTracker letterTracker={gameState.letterTracker} />
-            <HintBox
-                wordData={gameState.wordData}
-                showType={gameState.showType}
-                showDefinition={gameState.showDefinition}
-                setShowType={(value) => setGameState((prev) => ({ ...prev, showType: value }))}
-                setShowDefinition={(value) =>
-                    setGameState((prev) => ({ ...prev, showDefinition: value }))
-                }
-                revealHint={revealHint}
-                showHintBox={!gameState.gameWon && !gameState.gameLost && attemptsLeft === 1}
-                showHints={
-                    !gameState.gameWon &&
-                    !gameState.gameLost &&
-                    attemptsLeft <=
-                        Math.floor(maxAttempts(gameState.wordData?.word.length || 0) / 2)
-                }
-                showLastHint={showLastHint}
-                revealedHint={revealedHint}
-            />
+            {!gameState.gameWon && !gameState.gameLost && (
+                <>
+                    <LetterTracker letterTracker={gameState.letterTracker} />
+                    <HintBox
+                        wordData={gameState.wordData}
+                        showType={gameState.showType}
+                        showDefinition={gameState.showDefinition}
+                        setShowType={(value) =>
+                            setGameState((prev) => ({ ...prev, showType: value }))
+                        }
+                        setShowDefinition={(value) =>
+                            setGameState((prev) => ({ ...prev, showDefinition: value }))
+                        }
+                        revealHint={revealHint}
+                        showHintBox={
+                            !gameState.gameWon && !gameState.gameLost && attemptsLeft === 1
+                        }
+                        showHints={
+                            !gameState.gameWon &&
+                            !gameState.gameLost &&
+                            attemptsLeft <=
+                                Math.floor(maxAttempts(gameState.wordData?.word.length || 0) / 2)
+                        }
+                        showLastHint={showLastHint}
+                        revealedHint={revealedHint}
+                    />
+                </>
+            )}
 
             {(gameState.gameWon || gameState.gameLost) && (
                 <GameResultOverlay
