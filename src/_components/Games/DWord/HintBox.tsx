@@ -27,73 +27,34 @@ export default function HintBox({
 }: HintBoxProps) {
     return (
         <div className="mt-6 flex flex-col items-center gap-4 w-full">
-            {/* Type Hint */}
+            {/* Type & Definition Hint */}
             {showHints && (
                 <div
                     className={`flex flex-col items-center bg-gray-300 rounded-lg p-2 sm:p-4 relative cursor-pointer ${
-                        showType
+                        showType || showDefinition
                             ? 'border-2 border-green-800 rounded-md p-4 shadow-md'
                             : 'hover:bg-gray-400'
                     } w-full max-w-md sm:max-w-lg`}
-                    onClick={() => setShowType(true)}
+                    onClick={() => {
+                        setShowType(true);
+                        setShowDefinition(true);
+                    }}
                 >
                     <div className="w-full text-left text-gray-600 font-bold text-lg">HINT</div>
                     <div className="w-full text-left text-gray-800 font-medium text-xs sm:text-sm mt-2">
-                        {showType ? (
-                            <ul className="list-none">
-                                {wordData.type.map((type: string, index: number) => (
-                                    <li
-                                        key={index}
-                                        className="flex items-start gap-2 text-gray-800 font-bold mb-1"
-                                    >
-                                        <span
-                                            className="w-6 h-6 rounded-full bg-green-800 text-white flex items-center justify-center mr-2 flex-shrink-0"
-                                            style={{ minWidth: '1.5rem', minHeight: '1.5rem' }}
-                                        >
-                                            {index + 1}
-                                        </span>
-                                        <span className="flex-1">{type}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                        {showType && showDefinition ? (
+                            <div>
+                                <span className="block text-gray-800">
+                                    <span className="font-bold">Word type:</span>{' '}
+                                    {wordData.type || 'No type available'}
+                                </span>
+                                <span className="block mt-2">
+                                    <span className="font-bold">Definition:</span>{' '}
+                                    {wordData.definition || 'No definition available'}
+                                </span>
+                            </div>
                         ) : (
-                            'Reveal word types'
-                        )}
-                    </div>
-                </div>
-            )}
-
-            {/* Definition Hint */}
-            {showHints && (
-                <div
-                    className={`flex flex-col items-center bg-gray-300 rounded-lg p-2 sm:p-4 relative cursor-pointer ${
-                        showDefinition
-                            ? 'border-2 border-green-800 rounded-md p-4 shadow-md'
-                            : 'hover:bg-gray-400'
-                    } w-full max-w-md sm:max-w-lg`}
-                    onClick={() => setShowDefinition(true)}
-                >
-                    <div className="w-full text-left text-gray-600 font-bold text-lg">HINT</div>
-                    <div className="w-full text-left text-gray-800 font-medium text-xs sm:text-sm mt-2">
-                        {showDefinition ? (
-                            <ul className="list-none">
-                                {wordData.definition.map((definition: string, index: number) => (
-                                    <li
-                                        key={index}
-                                        className="flex items-start gap-2 text-gray-800 font-bold mb-1"
-                                    >
-                                        <span
-                                            className="w-6 h-6 rounded-full bg-green-800 text-white flex items-center justify-center mr-2 flex-shrink-0"
-                                            style={{ minWidth: '1.5rem', minHeight: '1.5rem' }}
-                                        >
-                                            {index + 1}
-                                        </span>
-                                        <span className="flex-1">{definition}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        ) : (
-                            <span className="block">Reveal word definitions</span>
+                            'Reveal a word type and definition'
                         )}
                     </div>
                 </div>

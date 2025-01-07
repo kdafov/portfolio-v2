@@ -40,7 +40,7 @@ export const AlertProvider: FC<AlertProviderProps> = ({ children }) => {
     return (
         <AlertContext.Provider value={{ showAlert }}>
             {children}
-            <div className="fixed bottom-4 right-4 space-y-2 z-50">
+            <div className="fixed top-4 right-4 space-y-2 z-50">
                 {alerts.map((alert) => (
                     <Alert
                         key={alert.id}

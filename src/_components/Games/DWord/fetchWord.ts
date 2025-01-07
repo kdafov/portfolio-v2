@@ -1,7 +1,7 @@
 export interface WordData {
     word: string;
-    definition: string[]; 
-    type: string[]; 
+    definition: string | null; 
+    type: string | null;       
 }
 
 export const fetchWord = async (): Promise<WordData> => {
@@ -12,13 +12,14 @@ export const fetchWord = async (): Promise<WordData> => {
         if (response.ok) {
             return {
                 word: data.word.toLowerCase(),
-                definition: data.definition ? JSON.parse(data.definition) : [],
-                type: data.type ? JSON.parse(data.type) : [],
+                definition: data.definition || null, 
+                type: data.type || null,             
             };
         } else {
             throw new Error('Failed to fetch word data');
         }
-    } catch {
+    } catch (error) {
+        console.error(error);
         throw new Error('There was an error loading the game. Try again later.');
     }
 };
