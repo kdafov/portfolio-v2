@@ -1,4 +1,3 @@
-import React from 'react';
 import { WordData } from './fetchWord';
 
 interface HintBoxProps {
@@ -26,13 +25,6 @@ export default function HintBox({
     showLastHint,
     revealedHint,
 }: HintBoxProps) {
-    const randomHint = React.useMemo(() => {
-        const randomType = wordData.type[Math.floor(Math.random() * wordData.type.length)];
-        const randomDefinition =
-            wordData.definition[Math.floor(Math.random() * wordData.definition.length)];
-        return { type: randomType, definition: randomDefinition };
-    }, [wordData]);
-
     return (
         <div className="mt-6 flex flex-col items-center gap-4 w-full">
             {/* Type & Definition Hint */}
@@ -53,15 +45,16 @@ export default function HintBox({
                         {showType && showDefinition ? (
                             <div>
                                 <span className="block text-gray-800">
-                                    <span className="font-bold">Word type:</span> {randomHint.type}
+                                    <span className="font-bold">Word type:</span>{' '}
+                                    {wordData.type || 'No type available'}
                                 </span>
                                 <span className="block mt-2">
                                     <span className="font-bold">Definition:</span>{' '}
-                                    {randomHint.definition}
+                                    {wordData.definition || 'No definition available'}
                                 </span>
                             </div>
                         ) : (
-                            'Reveal a random word type and definition'
+                            'Reveal a word type and definition'
                         )}
                     </div>
                 </div>
